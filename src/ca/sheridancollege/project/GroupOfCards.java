@@ -18,7 +18,7 @@ public class GroupOfCards {
 
     //The group of cards, stored in an ArrayList
     private ArrayList<Card> cards;
-    private int size = 52; //number of cards in a deck
+    private int size; //number of cards in a deck
     private Card[] card = new Card[size];
 
     private ArrayList<Card> deal1;

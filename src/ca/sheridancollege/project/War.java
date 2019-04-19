@@ -16,23 +16,23 @@ public class War extends Game {
 
     private ArrayList<Card> deal1;
     private ArrayList<Card> deal2;
-   
+
     private int count;
     private int warCount;
     private int p1Wins;
     private int p2Wins;
     private int p1WarWins;
     private int p2WarWins;
-        
+
     public War(String name) {
         super(name);
     }
-    
+
     @Override
     public void declareWinner() {
-        
+
     }
-    
+
     @Override
     public void play(ArrayList<Card> list1, ArrayList<Card> list2) {
 
@@ -48,7 +48,7 @@ public class War extends Game {
         int p1WarWins = 0;
         int p2WarWins = 0;
 
-       do {
+        do {
 
             if (deal1.size() > 0 && deal2.size() > 0) {
 
@@ -106,8 +106,9 @@ public class War extends Game {
                                 deal2.remove(i);
                                 deal1.remove(i);
                             }
+                            
                             p2WarWins++;
-
+                            
                             System.out.println(p1 + " has " + deal1.size() + " cards");
                             System.out.println(p2 + " has " + deal2.size() + " cards");
 
@@ -134,6 +135,9 @@ public class War extends Game {
                                     }
                                     p1WarWins++;
 
+                                    System.out.println(super.getPlayers().get(0).getPlayerID() + " has " + deal1.size() + " cards");
+                                    System.out.println(super.getPlayers().get(1).getPlayerID() + " has " + deal2.size() + " cards");
+
                                 } else if (deal2.get(9).getCard() > deal1.get(9).getCard()) {
                                     System.out.println(p2 + " won all 10 cards");
 
@@ -144,6 +148,9 @@ public class War extends Game {
                                         deal1.remove(i);
                                     }
                                     p2WarWins++;
+
+                                    System.out.println(super.getPlayers().get(0).getPlayerID() + " has " + deal1.size() + " cards");
+                                    System.out.println(super.getPlayers().get(1).getPlayerID() + " has " + deal2.size() + " cards");
 
                                 } else {
                                     System.out.println("What are the odds...");
@@ -178,43 +185,40 @@ public class War extends Game {
                             round = false;
                         }
                     }
-                    
-                    } else {
-                        System.out.println(super.getPlayers().get(1).getPlayerID() + " won\n");
-                        deal2.add(deal1.get(0));
-                        deal2.add(deal2.get(0));
-                        deal2.remove(0);
-                        deal1.remove(0);
-                        p2Wins++;
-
-                        System.out.println(super.getPlayers().get(0).getPlayerID() + " has " + deal1.size() + " cards");
-                        System.out.println(super.getPlayers().get(1).getPlayerID() + " has " + deal2.size() + " cards");
-                    }
 
                 } else {
-                    System.out.println("GAME OVER");
+                    System.out.println(super.getPlayers().get(1).getPlayerID() + " won\n");
+                    deal2.add(deal1.get(0));
+                    deal2.add(deal2.get(0));
+                    deal2.remove(0);
+                    deal1.remove(0);
+                    p2Wins++;
 
-                    if (deal1.size() == 0) {
-                        System.out.println(p1 + " ran out of cards!");
-                        System.out.println(super.getPlayers().get(1).getPlayerID() + " WINNER");
-                        round = false;
-                    } else if (deal2.size() == 0) {
-                        System.out.println(p2 + " ran out of cards!");
-                        System.out.println(super.getPlayers().get(0).getPlayerID() + " WINNER");
-                        round = false;
-                    }
+                    System.out.println(super.getPlayers().get(0).getPlayerID() + " has " + deal1.size() + " cards");
+                    System.out.println(super.getPlayers().get(1).getPlayerID() + " has " + deal2.size() + " cards");
                 }
-                count++;
-            } while(round == true);
-       
 
-            //Results
-            System.out.println("Player " + p1 + " won: " + p1Wins + " times | Player " + p2 + " won: " + p2Wins + " times");
-            System.out.println("War happened: " + warCount + " times");
-            System.out.println("Player " + p1 + " won: " + p1WarWins + " wars | Player " + p2 + " won: " + p2WarWins + " wars");
-        }
+            } else {
+                System.out.println("GAME OVER");
 
-    
+                if (deal1.size() == 0) {
+                    System.out.println(p1 + " ran out of cards!");
+                    System.out.println(super.getPlayers().get(1).getPlayerID() + " WINNER");
+                    round = false;
+                } else if (deal2.size() == 0) {
+                    System.out.println(p2 + " ran out of cards!");
+                    System.out.println(super.getPlayers().get(0).getPlayerID() + " WINNER");
+                    round = false;
+                }
+            }
+            count++;
+        } while (round == true);
+
+        //Results
+        System.out.println("Player " + p1 + " won: " + p1Wins + " times | Player " + p2 + " won: " + p2Wins + " times");
+        System.out.println("War happened: " + warCount + " times");
+        System.out.println("Player " + p1 + " won: " + p1WarWins + " wars | Player " + p2 + " won: " + p2WarWins + " wars");
+    }
 
     public static void main(String[] args) {
 
@@ -222,6 +226,7 @@ public class War extends Game {
         Game war = new War("War");
         //create a new deck of cards
         GroupOfCards cards = new GroupOfCards();
+        cards.setSize(52);
         //create a list of players
         ArrayList<Player> playerList = new ArrayList<>();
 
@@ -256,7 +261,6 @@ public class War extends Game {
         //play the game with two dealt hands
         war.play(cards.playerOneCards(), cards.playerTwoCards());
 
-        
     }
 
 }

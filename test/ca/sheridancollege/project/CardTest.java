@@ -43,6 +43,7 @@ public class CardTest {
         Card instance = null;
         int expResult = 13;
         int result = instance.getCard();
+      
         assertEquals(expResult, result);
         
     }
@@ -50,6 +51,7 @@ public class CardTest {
      @Test
     public void testBadGetCard() {
         System.out.println("getCard");
+        
         Card instance = null;
         int expResult = 14;
         int result = instance.getCard();
